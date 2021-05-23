@@ -26,6 +26,7 @@ print(ru_local.KING)
 data = 2020
 
 def res(data):
+    '''This main function changes the resourses'''
     while data != 2040 or discontent[ru_local.ANGRY] < 100:
         if data % 4 == 0:
             RandomEvent()
@@ -127,34 +128,41 @@ print(ru_local.PRESIDENT)
 
 
 def drought():
+    '''This function make the drought in the country'''
     print(ru_local.DROUGHT)
     resources[ru_local.SEED] = resources[ru_local.LAND] / 2
 
 def war():
+    '''This is war in the country'''
     print(ru_local.WAR)
     resources[ru_local.BREAD] = 0
     resources[ru_local.SEED] = resources[ru_local.SEED] / 2
     resources[ru_local.PEOPLE] = resources[ru_local.PEOPLE] * 5/6
 
 def inflation():
+    '''This is inflation in the country'''
     print(ru_local.INFLATION)
     resources[ru_local.BUDGET] = resources[ru_local.BUDGET] * 0.8
 
 def victory():
+    '''This add a new part to your country'''
     print(ru_local.VICTORY)
     resources[ru_local.LAND] += 1000
     resources[ru_local.BUDGET] += 200
 
 def riot():
+    '''This is the riot in the country'''
     print(ru_local.RIOT)
     resources[ru_local.PEOPLE] = resources[ru_local.PEOPLE] * 0.95
     resources[ru_local.BREAD] = resources[ru_local.BREAD] * 0.85
 
 def GoodWeather():
+    '''This function makes the good weather in the country'''
     print(ru_local.WEATHER)
     resources[ru_local.SEED] = resources[ru_local.SEED] * 1.1
 
 def RandomEvent():
+    '''This function makes the random event'''
     event = random.randint(1, 6)
     if event == 1:
         drought()
@@ -169,8 +177,5 @@ def RandomEvent():
     elif event == 6:
         GoodWeather()
 
-
-
-
-
-z = res(data)
+if __name__ == '__main__':
+    res()
