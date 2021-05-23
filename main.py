@@ -1,8 +1,13 @@
+"""Case-study #9 Game strategy development
+Developers:
+Турчинович М. (45%), Зубарева Т. (45%) , Костылев М. (50%)
+"""
+import math
 import ru_local
 import random
 print(ru_local.HI)
 ok = input(ru_local.OK).capitalize().strip()
-while ok != 'Ok':
+while not (ok == 'Ok' or ok == 'Ок'):
     ok = input(ru_local.RESTART).capitalize().strip()
 resources = {ru_local.LAND: random.randint(100, 500), ru_local.BUDGET: random.randint(100, 500),
              ru_local.SEED: random.randint(100, 500), ru_local.BREAD: random.randint(100, 500),
@@ -14,13 +19,13 @@ print(ru_local.NOW, ru_local.FEERLAND, resources[ru_local.LAND],
 print(ru_local.ABILITY)
 print('')
 ok = input(ru_local.OK).capitalize().strip()
-while ok != 'Ok':
+while not (ok == 'Ok' or ok == 'Ок'):
     ok = input(ru_local.RESTART).capitalize().strip()
 print(ru_local.LASTKING)
 print(ru_local.NOWANGRY,
       discontent[ru_local.ANGRY], sep='\n')
 ok = input(ru_local.OK).capitalize().strip()
-while ok != 'Ok':
+while not (ok == 'Ok' or ok == 'Ок'):
     ok = input(ru_local.RESTART).capitalize().strip()
 print(ru_local.KING)
 data = 2020
@@ -91,7 +96,7 @@ def res(data):
             print(ru_local.BREADPRICE, price_bread)
             buy_bread = int(input(ru_local.BREADBUY))
 
-        resources[ru_local.BUDGET] -= buy_bread * price_bread
+        resources[ru_local.BUDGET] -= math.ceil(buy_bread * price_bread)
 
         print(ru_local.MONEY, resources[ru_local.BUDGET])
         print(ru_local.SEEDPRICE, price_corn)
@@ -101,7 +106,7 @@ def res(data):
             print(ru_local.SEEDPRICE, price_corn)
             buy_corn = int(input(ru_local.SEEDBUY))
 
-        resources[ru_local.BUDGET] -= buy_corn * price_corn
+        resources[ru_local.BUDGET] -= math.ceil(buy_corn * price_corn)
 
         print(ru_local.MONEY, resources[ru_local.BUDGET])
         buy_people = int(input(ru_local.SOCMONEY))
@@ -111,19 +116,18 @@ def res(data):
 
         resources[ru_local.BUDGET] -= buy_people
 
-
-
         data += 1
         if (resources[ru_local.BREAD] + buy_people) / 2 / resources[ru_local.PEOPLE] < 1:
             discontent[ru_local.ANGRY] += 20
         elif (resources[ru_local.BREAD] + buy_people) / 2 / resources[ru_local.PEOPLE] > 1:
             discontent[ru_local.ANGRY] += 20
-        resources[ru_local.BREAD] += round(0.8 * corn_plant * resources[ru_local.LAND])
-        resources[ru_local.SEED] += round(buy_corn * price_corn)
-        resources[ru_local.LAND] += round(buy_land * price_land)
+        resources[ru_local.BREAD] += math.ceil(0.8 * corn_plant * resources[ru_local.LAND])
+        resources[ru_local.SEED] += math.ceil(buy_corn * price_corn)
+        resources[ru_local.LAND] += math.ceil(buy_land * price_land)
         resources[ru_local.PEOPLE] += random.randint(-1, 2)
-        resources[ru_local.BUDGET] += round(resources[ru_local.PEOPLE] * 10)
-
+        resources[ru_local.BUDGET] += math.ceil(resources[ru_local.PEOPLE] * 10)
+        print()
+        print()
 print(ru_local.PRESIDENT)
 
 
@@ -178,4 +182,4 @@ def RandomEvent():
         GoodWeather()
 
 if __name__ == '__main__':
-    res()
+    res(data)
